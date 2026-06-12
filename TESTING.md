@@ -67,13 +67,14 @@ Done:
       No fixtures.
 - [x] `OdfFile/Reader/Converter/StarMath2OOXML/TestEQNtoOOXML` — dep: StarMathConverter.
       No fixtures.
+- [x] `OdfFile/Reader/Converter/SMCustomShape2OOXML/TestSMCustomShape` — dep:
+      SMCustomShape2OOXML (new CMake library target created for this suite; itself depends on
+      UnicodeConverter, kernel). No fixtures.
 
 ### gtest suites to migrate
 
 Runnable headless once migrated (no missing fixtures, no JS engine):
 
-- [ ] `OdfFile/Reader/Converter/StarMath2OOXML/TestSMCustomShape` — dep: StarMathConverter
-      (confirm sources exist).
 - [ ] `OfficeUtils/tests` — deps: kernel, UnicodeConverter. Fixtures committed under
       `tests/zip/` (stage next to binary).
 - [ ] `OdfFile/Test/test_odf` — OdfFormatLib dependency chain; own `main`. Fixtures
