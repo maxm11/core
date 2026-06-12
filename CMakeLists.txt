@@ -35,6 +35,11 @@ else()
         add_subdirectory( "${CORE_ROOT_DIR}/DesktopEditor/graphics/tests/BooleanOperations_Unit-tests" booleanoperations_test )
         add_subdirectory( "${CORE_ROOT_DIR}/OdfFile/Reader/Converter/StarMath2OOXML/TestSMConverter" starmath_smconverter_test )
         add_subdirectory( "${CORE_ROOT_DIR}/OdfFile/Reader/Converter/StarMath2OOXML/TestEQNtoOOXML" starmath_eqntoooxml_test )
+        # PdfFile/test runs headless with its single fixture-dependent case
+        # (CPdfFileTest.EditPdfFromBase64) excluded via GTEST_FILTER; all other
+        # cases self-skip. See PdfFile/test/CMakeLists.txt and TESTING.md for the
+        # missing fixtures needed to fully enable it.
+        add_subdirectory( "${CORE_ROOT_DIR}/PdfFile/test" pdffile_test )
     endif()
 
 endif()
