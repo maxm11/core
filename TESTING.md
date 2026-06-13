@@ -67,6 +67,17 @@ Done:
       No fixtures.
 - [x] `OdfFile/Reader/Converter/StarMath2OOXML/TestEQNtoOOXML` — dep: StarMathConverter.
       No fixtures.
+- [x] `OdfFile/Test/test_odf` — deps: OdfFormatLib (for `ConvertODF2OOXml`), kernel,
+      graphics, UnicodeConverter; `OfficeFileFormatChecker2.cpp`, `pole.cpp` and
+      `unicode_util.cpp` are compiled into the target (as `x2tTester` does). Owns its
+      `main()` (so no `GTEST_MAIN`). Builds only `test.cpp` + `common.cpp` — the
+      entrance/motion/audio/interactions modules are commented out in the `.pro`, so the
+      suite registers no `TEST()` cases yet; the global `TestEnv` still exercises an
+      `.odp -> .pptx` conversion in its `SetUp()`. Fixtures under `ExampleFiles/` are
+      staged next to the binary and the test runs from there (the fixture path
+      `ExampleFiles/motion.odp` is working-dir-relative). The committed `common.cpp` had
+      absolute Windows include paths and a `#pragma comment(lib, ...)` block; these were
+      replaced with repo-relative includes (CMake links the libraries).
 
 ### gtest suites to migrate
 
@@ -76,8 +87,6 @@ Runnable headless once migrated (no missing fixtures, no JS engine):
       (confirm sources exist).
 - [ ] `OfficeUtils/tests` — deps: kernel, UnicodeConverter. Fixtures committed under
       `tests/zip/` (stage next to binary).
-- [ ] `OdfFile/Test/test_odf` — OdfFormatLib dependency chain; own `main`. Fixtures
-      committed under `test_odf/ExampleFiles/`.
 - [ ] `OOXML/test` — most complex: links the x2t dylib sources
       (`x2t.cpp`, `cextracttools.cpp`, `ASCConverters.cpp`, `OfficeFileFormatChecker2.cpp`);
       own `main`; conversion fixtures under `test/ExampleFiles/`.
